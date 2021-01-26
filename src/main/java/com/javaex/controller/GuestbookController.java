@@ -69,6 +69,10 @@ public class GuestbookController {
 		//테스트해보자
 		//System.out.println(guestVo.toString());
 		
+		//파라미터 -->리다이렉트 --> 요청 url 주소를 다시주고 다시시작해야함.
+		//redirect:/guestbook/list?no=3
+		//model --> 포워드  --> 내부 jsp 찾는것
+		
 		//dao --> guestDelete()
 		int result = guestDao.guestDelete(guestVo);
 		
@@ -77,10 +81,10 @@ public class GuestbookController {
 			return "redirect:/guestbook/list";
 		} else {	//실패
 			
-			//model을 통해서 데이터를 전송해주자
-			model.addAttribute("result", result);
-			//다시 deleteForm 포워드
-			return "deleteForm";
+			//deleteForm?no=guestVo.getNo()&result=0
+			//리다이렉트 시켜줘야함..
+			return "redirect:/guestbook/guestDelete?result=0&no=" + guestVo.getNo();
+
 		}
 	}
 	
